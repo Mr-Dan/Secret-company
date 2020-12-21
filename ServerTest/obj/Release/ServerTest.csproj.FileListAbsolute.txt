@@ -1,0 +1,14 @@
+D:\сборка\cerf\ServerTest.exe.config
+D:\сборка\cerf\ServerTest.exe.manifest
+D:\сборка\cerf\ServerTest.application
+D:\сборка\cerf\ServerTest.exe
+D:\сборка\cerf\ServerTest.pdb
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.csprojAssemblyReference.cache
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.Form1.resources
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.Properties.Resources.resources
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.csproj.GenerateResource.cache
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.csproj.CoreCompileInputs.cache
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.exe.manifest
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.application
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.exe
+D:\программ\ServerTest\ServerTest\obj\Release\ServerTest.pdb

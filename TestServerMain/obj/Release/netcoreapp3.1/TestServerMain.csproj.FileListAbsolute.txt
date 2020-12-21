@@ -1,0 +1,13 @@
+D:\программ\ServerTest\TestServerMain\bin\Release\netcoreapp3.1\TestServerMain.exe
+D:\программ\ServerTest\TestServerMain\bin\Release\netcoreapp3.1\TestServerMain.deps.json
+D:\программ\ServerTest\TestServerMain\bin\Release\netcoreapp3.1\TestServerMain.runtimeconfig.json
+D:\программ\ServerTest\TestServerMain\bin\Release\netcoreapp3.1\TestServerMain.runtimeconfig.dev.json
+D:\программ\ServerTest\TestServerMain\bin\Release\netcoreapp3.1\TestServerMain.dll
+D:\программ\ServerTest\TestServerMain\bin\Release\netcoreapp3.1\TestServerMain.pdb
+D:\программ\ServerTest\TestServerMain\obj\Release\netcoreapp3.1\TestServerMain.csprojAssemblyReference.cache
+D:\программ\ServerTest\TestServerMain\obj\Release\netcoreapp3.1\TestServerMain.AssemblyInfoInputs.cache
+D:\программ\ServerTest\TestServerMain\obj\Release\netcoreapp3.1\TestServerMain.AssemblyInfo.cs
+D:\программ\ServerTest\TestServerMain\obj\Release\netcoreapp3.1\TestServerMain.csproj.CoreCompileInputs.cache
+D:\программ\ServerTest\TestServerMain\obj\Release\netcoreapp3.1\TestServerMain.dll
+D:\программ\ServerTest\TestServerMain\obj\Release\netcoreapp3.1\TestServerMain.pdb
+D:\программ\ServerTest\TestServerMain\obj\Release\netcoreapp3.1\TestServerMain.genruntimeconfig.cache
