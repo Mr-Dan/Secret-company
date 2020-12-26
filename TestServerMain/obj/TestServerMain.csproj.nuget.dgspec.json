@@ -13,13 +13,9 @@
         "packagesPath": "C:\\Users\\Дан\\.nuget\\packages\\",
         "outputPath": "D:\\программ\\ServerTest\\TestServerMain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
           "C:\\Users\\Дан\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

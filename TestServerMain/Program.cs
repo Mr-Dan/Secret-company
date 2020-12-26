@@ -61,8 +61,8 @@ namespace TestServerMain
                         keys = clientsList.Keys;
                         foreach (string s in keys)
                         {
-                            string y = s.Substring(0, 5);
-                            string x = dataFromClient.Substring(0, 5);
+                            string y = s.Substring(0, 9);
+                            string x = dataFromClient.Substring(0, 9);
                               if (y == x)
                               {   
                                 
@@ -118,6 +118,36 @@ namespace TestServerMain
                     Array.Clear(broadcastBytes, 0, broadcastBytes.Length);
                  }
               
+            }
+        }
+
+        public static void claimMessages(string msg, string uName, string myName)
+        {
+
+            foreach (DictionaryEntry Item in clientsList)
+            {
+                string Anonymous = "Анонимн";
+                Object obj = new Object();
+                obj = Item.Key;
+                string s = obj.ToString();
+
+                string sName = uName;
+                string smyName = myName.Substring(0,5);
+               
+
+                if (s.IndexOf(sName) > -1 || s.IndexOf(smyName) > -1)
+                {
+                    TcpClient broadcastSocket;
+                    broadcastSocket = (TcpClient)Item.Value;
+                    NetworkStream broadcastStream = broadcastSocket.GetStream();
+                    Byte[] broadcastBytes = null;
+                    msg = msg + "#";
+                    broadcastBytes = Encoding.UTF8.GetBytes(Anonymous + " пожаловался :" + msg);
+                    broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
+                    broadcastStream.Flush();
+                    Array.Clear(broadcastBytes, 0, broadcastBytes.Length);
+                }
+
             }
         }
 
@@ -214,7 +244,20 @@ namespace TestServerMain
                         Console.WriteLine("От клиента - " + clNo + " : " + dataFromClient);
                         Program.broadcast(dataFromClient, clNo, true);
                     }
-                    
+
+                    else if((check = dataFromClient.IndexOf("#")) > 0)
+                    {   string Anonymous = "Анонимн";
+                        string ADM ;                      
+                        dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("#"));
+                        ADM = dataFromClient.Substring(0, dataFromClient.IndexOf("@"));
+                        countWords = dataFromClient.IndexOf("@");
+                        dataFromClient = dataFromClient.Remove(0, countWords + 1);
+                        Console.WriteLine("От клиента - " + Anonymous + " : " + dataFromClient);
+                        Program.claimMessages(dataFromClient, ADM, clNo);
+
+
+                    }
+
 
                     else if ((check = dataFromClient.IndexOf("^")) > 0)
                     {
@@ -236,6 +279,8 @@ namespace TestServerMain
                         Console.WriteLine("От клиента - " + namewhisper + " : " + dataFromClient);
                         Program.TalkSendingMessagesToTalk(dataFromClient, namewhisper, clNo);                  
                     }
+
+
                     Array.Clear(bytesFrom, 0, bytesFrom.Length);
                 }
             }

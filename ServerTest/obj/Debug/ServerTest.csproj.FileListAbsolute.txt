@@ -12,3 +12,4 @@ D:\программ\ServerTest\ServerTest\bin\Debug\ServerTest.exe.manifest
 D:\программ\ServerTest\ServerTest\bin\Debug\ServerTest.application
 D:\программ\ServerTest\ServerTest\obj\Debug\ServerTest.exe.manifest
 D:\программ\ServerTest\ServerTest\obj\Debug\ServerTest.application
+D:\программ\ServerTest\ServerTest\obj\Debug\ServerTest.Form2.resources

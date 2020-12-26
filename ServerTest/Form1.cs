@@ -19,6 +19,8 @@ namespace ServerTest
         TcpClient clientSocket = new TcpClient();
         NetworkStream serverStream = default(NetworkStream);
         static string readData;
+        Form2 form2 = new Form2();
+        bool claim = false;
         int player;
         public Form1()
         {
@@ -29,6 +31,8 @@ namespace ServerTest
             online_box.Visible = false;
             Connect_box.Visible = false;
             lk_Box.Visible = false;
+            claimbutton.Visible = false;
+          
         }
 
         private void Connect_Click(object sender, EventArgs e)
@@ -42,7 +46,12 @@ namespace ServerTest
                 clientSocket.Connect(IPAddress.Parse(IP.Text), Int32.Parse(Port.Text));
                 serverStream = clientSocket.GetStream();
 
-                string Message = "ID"+ID.Text + " " + name.Text + "$";
+                if(permissionbox.Text.Length<3)
+                {
+                    permissionbox.Text = "rab";
+                }
+
+                string Message = "ID"+ID.Text + " " + permissionbox.Text + " " + name.Text  + "$";
                 int Messagesize = Message.Length;
                 byte[] outStream = new byte[Messagesize];
 
@@ -60,9 +69,17 @@ namespace ServerTest
                 Port.ReadOnly = true;
                 name.ReadOnly = true;
                 ID.ReadOnly = true;
+                permissionbox.ReadOnly = true;
+                //form2.Show();
+            //    form2.Hide();
+                if (permissionbox.Text == "ADM")
+                {
+                    claimbutton.Visible = true;
 
-              /*  IDRoom.ReadOnly = true;
-                buttonIDRoom.Enabled = false;*/
+                }
+
+                /*  IDRoom.ReadOnly = true;
+                  buttonIDRoom.Enabled = false;*/
 
             }
             catch (Exception ex)
@@ -80,8 +97,10 @@ namespace ServerTest
                 Port.ReadOnly = false;
                 name.ReadOnly = false;
                 ID.ReadOnly = false;
-              /*  IDRoom.ReadOnly = false;
-                buttonIDRoom.Enabled = true;*/
+                permissionbox.ReadOnly = false;
+
+                /*  IDRoom.ReadOnly = false;
+                  buttonIDRoom.Enabled = true;*/
 
             }
 
@@ -121,18 +140,27 @@ namespace ServerTest
                 this.Invoke(new MethodInvoker(msg));
 
             }
-            else if (readData.IndexOf("/") == -1)
+            else if (readData.IndexOf("/") == -1 && readData.IndexOf("#") == -1)
             {
                 ChatBoxAll.Text = ChatBoxAll.Text + Environment.NewLine + readData;
-                
 
             }
 
             else if(readData.IndexOf("/") > -1)
             {
-
-                onlinelook(); ;
+                onlinelook(); 
             }
+
+            else if (readData.IndexOf("#") > -1)
+            {
+
+                int del = readData.IndexOf("#");
+                readData = readData.Remove(del, del );
+
+                form2.claimBox.Text = form2.claimBox.Text + Environment.NewLine + readData;
+
+            }
+
 
         }
 
@@ -141,8 +169,8 @@ namespace ServerTest
             string whispertext = whisper.Text.ToString() ;
 
 
-           if (whispertext.Length >0)
-            {
+           if (whispertext.Length >0 && claim == false)
+           {
                 string Message =  whispertext + "@" + SendBoxAll.Text + "*";
                 int Messagesize = Message.Length;
                 byte[] outStream = new byte[Messagesize];
@@ -150,18 +178,31 @@ namespace ServerTest
                 serverStream.Write(outStream, 0, outStream.Length);
                 serverStream.Flush();
                 SendBoxAll.Clear();
-            }
-            if (whispertext.Length == 0)
+           }
+
+           if (whispertext.Length == 0 && claim == false)
            {
 
-            string Message = SendBoxAll.Text + "$";
-            int Messagesize = Message.Length;
-            byte[] outStream = new byte[Messagesize];
-            outStream = Encoding.UTF8.GetBytes(Message);
-            serverStream.Write(outStream, 0, outStream.Length);
-            serverStream.Flush();
-            SendBoxAll.Clear();
+                string Message = SendBoxAll.Text + "$";
+                int Messagesize = Message.Length;
+                byte[] outStream = new byte[Messagesize];
+                outStream = Encoding.UTF8.GetBytes(Message);
+                serverStream.Write(outStream, 0, outStream.Length);
+                serverStream.Flush();
+                SendBoxAll.Clear();
             }
+
+           if (claim == true)
+           {
+                SendBoxAll.Text = SendBoxAll.Text ;
+                string Message = "ADM" + "@" + SendBoxAll.Text +" "+ "#";
+                int Messagesize = Message.Length;
+                byte[] outStream = new byte[Messagesize];
+                outStream = Encoding.UTF8.GetBytes(Message);
+                serverStream.Write(outStream, 0, outStream.Length);
+                serverStream.Flush();
+                SendBoxAll.Clear();
+           }
 
         }
 
@@ -364,7 +405,7 @@ namespace ServerTest
 
         private void online_Click(object sender, EventArgs e)
         {
-
+            claimbutton.Enabled = true;
             if (online_box.Visible == false)
             {
                 Connect_box.Visible = false;
@@ -465,5 +506,53 @@ namespace ServerTest
         {
             whisper.Clear();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void claimbutton_Click(object sender, EventArgs e)
+        {
+
+           
+
+            Form fc = Application.OpenForms[ID.Text];
+
+            if (fc == null) form2.Show(); 
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            Form fc = Application.OpenForms[ID.Text];
+
+            if (fc == null) claimbutton.Enabled = true;
+
+            
+
+        }
+
+        private void checkBoxClaim_CheckedChanged(object sender, EventArgs e)
+        {
+
+             if (checkBoxClaim.Checked == false )
+            {
+                claim = false;
+                whisper.Enabled = true;
+
+            }
+
+            if (checkBoxClaim.Checked == true)
+            {
+                claim = true;
+                whisper.Enabled = false;
+            }
+
+        }
+
+       
     }
 }
+    

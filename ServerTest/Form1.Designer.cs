@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.IP = new System.Windows.Forms.TextBox();
             this.Port = new System.Windows.Forms.TextBox();
             this.Connect = new System.Windows.Forms.Button();
@@ -46,10 +47,15 @@
             this.Connect_box = new System.Windows.Forms.GroupBox();
             this.lk = new System.Windows.Forms.Button();
             this.lk_Box = new System.Windows.Forms.GroupBox();
+            this.claimbutton = new System.Windows.Forms.Button();
+            this.permissionlabel = new System.Windows.Forms.Label();
+            this.permissionbox = new System.Windows.Forms.TextBox();
             this.DataConnect = new System.Windows.Forms.Button();
             this.whisper = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.checkBoxClaim = new System.Windows.Forms.CheckBox();
             this.Connect_box.SuspendLayout();
             this.lk_Box.SuspendLayout();
             this.SuspendLayout();
@@ -98,7 +104,7 @@
             this.SendBoxAll.MaxLength = 8000;
             this.SendBoxAll.Multiline = true;
             this.SendBoxAll.Name = "SendBoxAll";
-            this.SendBoxAll.Size = new System.Drawing.Size(486, 47);
+            this.SendBoxAll.Size = new System.Drawing.Size(486, 70);
             this.SendBoxAll.TabIndex = 5;
             this.SendBoxAll.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyDown);
             // 
@@ -221,16 +227,47 @@
             // lk_Box
             // 
             this.lk_Box.BackColor = System.Drawing.SystemColors.Info;
+            this.lk_Box.Controls.Add(this.claimbutton);
+            this.lk_Box.Controls.Add(this.permissionlabel);
+            this.lk_Box.Controls.Add(this.permissionbox);
             this.lk_Box.Controls.Add(this.name);
             this.lk_Box.Controls.Add(this.label5);
             this.lk_Box.Controls.Add(this.ID);
             this.lk_Box.Controls.Add(this.label6);
             this.lk_Box.Location = new System.Drawing.Point(356, 149);
             this.lk_Box.Name = "lk_Box";
-            this.lk_Box.Size = new System.Drawing.Size(142, 87);
+            this.lk_Box.Size = new System.Drawing.Size(142, 145);
             this.lk_Box.TabIndex = 22;
             this.lk_Box.TabStop = false;
             this.lk_Box.Text = "Кабинет";
+            // 
+            // claimbutton
+            // 
+            this.claimbutton.Location = new System.Drawing.Point(7, 115);
+            this.claimbutton.Name = "claimbutton";
+            this.claimbutton.Size = new System.Drawing.Size(72, 24);
+            this.claimbutton.TabIndex = 25;
+            this.claimbutton.Text = "Жалобы";
+            this.claimbutton.UseVisualStyleBackColor = true;
+            this.claimbutton.Click += new System.EventHandler(this.claimbutton_Click);
+            // 
+            // permissionlabel
+            // 
+            this.permissionlabel.AutoSize = true;
+            this.permissionlabel.Location = new System.Drawing.Point(104, 86);
+            this.permissionlabel.Name = "permissionlabel";
+            this.permissionlabel.Size = new System.Drawing.Size(39, 13);
+            this.permissionlabel.TabIndex = 20;
+            this.permissionlabel.Text = "Права";
+            // 
+            // permissionbox
+            // 
+            this.permissionbox.Location = new System.Drawing.Point(6, 82);
+            this.permissionbox.MaxLength = 10;
+            this.permissionbox.Name = "permissionbox";
+            this.permissionbox.Size = new System.Drawing.Size(100, 20);
+            this.permissionbox.TabIndex = 19;
+            this.permissionbox.Text = "ADM";
             // 
             // DataConnect
             // 
@@ -268,11 +305,28 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // checkBoxClaim
+            // 
+            this.checkBoxClaim.AutoSize = true;
+            this.checkBoxClaim.Location = new System.Drawing.Point(251, 389);
+            this.checkBoxClaim.Name = "checkBoxClaim";
+            this.checkBoxClaim.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxClaim.TabIndex = 25;
+            this.checkBoxClaim.Text = "Жалоба";
+            this.checkBoxClaim.UseVisualStyleBackColor = true;
+            this.checkBoxClaim.CheckedChanged += new System.EventHandler(this.checkBoxClaim_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 467);
+            this.ClientSize = new System.Drawing.Size(565, 507);
+            this.Controls.Add(this.checkBoxClaim);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.whisper);
@@ -289,6 +343,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Connect_box.ResumeLayout(false);
             this.Connect_box.PerformLayout();
             this.lk_Box.ResumeLayout(false);
@@ -304,24 +359,29 @@
         private System.Windows.Forms.TextBox Port;
         private System.Windows.Forms.Button Connect;
         private System.Windows.Forms.Button Send;
-        private System.Windows.Forms.TextBox SendBoxAll;
         private System.Windows.Forms.TextBox name;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox ChatBoxAll;
-        private System.Windows.Forms.TextBox ID;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox online_box;
         private System.Windows.Forms.Button online;
         private System.Windows.Forms.GroupBox Connect_box;
         private System.Windows.Forms.Button lk;
-        private System.Windows.Forms.GroupBox lk_Box;
         private System.Windows.Forms.Button DataConnect;
         private System.Windows.Forms.TextBox whisper;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label permissionlabel;
+        private System.Windows.Forms.TextBox permissionbox;
+        public System.Windows.Forms.Button claimbutton;
+        public System.Windows.Forms.GroupBox lk_Box;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox checkBoxClaim;
+        public System.Windows.Forms.TextBox SendBoxAll;
+        public System.Windows.Forms.TextBox ID;
     }
 }
 
